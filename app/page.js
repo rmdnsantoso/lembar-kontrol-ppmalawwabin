@@ -90,7 +90,7 @@ export default function Home() {
              <img src="/logoppm.png" alt="Logo PPM" className="h-24 w-auto object-contain drop-shadow-md" onError={(e) => e.target.style.display = 'none'} />
         </div>
         <h1 className="text-3xl font-bold text-slate-900 mb-2">PPM Al-Awwabin</h1>
-        <p className="text-slate-500">Generator Lembar Kontrol Hafalan & Belajar</p>
+        <p className="text-slate-500">Generator Lembar Kontrol Makna Al-Quran & Al-Hadist</p>
       </div>
 
       <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden w-full">
