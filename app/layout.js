@@ -1,16 +1,17 @@
-import "./globals.css";
+import "./globals.css"; // <--- INI YANG TADI KETINGGALAN, PENTING BANGET!
 
 export const metadata = {
-  title: "Lembar Kontrol PPM Al-Awwabin",
-  description: "Generator Lembar Kontrol Santri",
+  title: 'SIANDRE - PPM Al-Awwabin',
+  description: 'Santri Idaman Anti Drama Rajin Evaluasi. Generator Lembar Kontrol Hafalan & Belajar.',
+  icons: {
+    icon: '/icon.png', // Pastikan file icon.png ada di folder app
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body className="antialiased bg-slate-50 text-slate-900">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
