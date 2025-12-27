@@ -42,7 +42,7 @@ export default function Home() {
       return;
     }
     if (selectedItems.length === 0) {
-      toast.error('Pilih materi hafalan dulu', {
+      toast.error('Pilih materinya dulu ya', {
         style: { borderRadius: '10px', background: '#333', color: '#fff' },
       });
       return;
