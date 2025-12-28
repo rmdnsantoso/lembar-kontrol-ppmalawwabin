@@ -21,17 +21,10 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
   const pageWidth = 210;
   const contentWidth = pageWidth - (marginX * 2);
 
-  // --- SETTINGAN NEKAT (PAKSA MODE) ---
-  
-  // 1. Footer di 295mm (Sisa 2mm dari kertas habis)
-  const footerY = 295; 
-  
-  // 2. Batas Toleransi Maksimal di 292mm
-  // Konten boleh turun sampai sini demi nyelamatin surat biar gak pindah halaman.
-  // Jarak ke footer cuma 3mm. Mepet abis!
-  const absoluteLimitY = 292; 
+  // --- SETTINGAN (NAIK DIKIT BIAR AMAN) ---
+  const footerY = 294;        // Posisi Footer (Naik 2mm dari sebelumnya)
+  const absoluteLimitY = 291; // Batas Konten (Naik dikit biar gak nabrak footer)
 
-  // Ukuran Box
   const boxSize = 6.5; 
   const gap = 1;       
 
@@ -91,20 +84,21 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
   let patternCount = 0; 
 
   selectedItems.forEach((item) => {
-    // Hitung Kebutuhan Tinggi
+    
+    // --- 1. HITUNG KEBUTUHAN TINGGI SURAT ---
     const boxesPerRow = Math.floor(contentWidth / (boxSize + gap));
     const totalRows = Math.ceil(item.pages / boxesPerRow);
     
     const hHeader = 8;
-    const hGap = 9;
+    const hGap = 8; 
     const hBoxes = totalRows * (boxSize + gap);
+    
     const totalHeightNeeded = hHeader + hGap + hBoxes;
 
-    // LOGIKA PAKSA:
-    // Cek sisa kertas sampai batas ABSOLUT (292mm)
+    // --- 2. CEK SISA KERTAS ---
     const spaceLeft = absoluteLimitY - currentY;
 
-    // Hanya pindah halaman kalau beneran GAK MUAT di zona "Nekat" ini.
+    // --- 3. LOGIKA KEEP TOGETHER ---
     if (totalHeightNeeded > spaceLeft && totalHeightNeeded < 200) {
         doc.addPage();
         currentY = 20; 
@@ -126,9 +120,9 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
     doc.setFontSize(8);
     doc.text(`Target: ${item.pages} ${satuan}`, pageWidth - marginX - 3, currentY + 5.5, { align: 'right' });
 
-    currentY += 9; 
+    currentY += 8.5; 
 
-    // Kotak-kotak
+    // Loop Kotak
     let xPos = marginX;
     
     doc.setTextColor(0, 0, 0); 
@@ -137,11 +131,7 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
     doc.setLineWidth(0.1);
 
     for (let i = 1; i <= item.pages; i++) {
-      
-      // Safety Check Terakhir (Batas Mati)
       if (xPos === marginX) {
-          // Kalau udah lewat 292mm, ya mau gak mau harus pindah. 
-          // (Ini batas fisik printer biasanya)
           if (currentY + boxSize > absoluteLimitY) {
               doc.addPage(); 
               currentY = 20; 
@@ -166,7 +156,7 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
         currentY += (boxSize + gap);
     }
     
-    currentY += 5; 
+    currentY += 3; 
   });
 
   // Tanda Tangan
@@ -186,7 +176,7 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
   currentY += 20;
   doc.text('( ..................................... )', signX, currentY);
 
-  // BRANDING NINJA (POSISI 295mm)
+  // BRANDING NINJA (Posisi 294mm)
   const totalPages = doc.getNumberOfPages();
 
   for (let i = 1; i <= totalPages; i++) {

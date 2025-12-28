@@ -1,4 +1,3 @@
-// src/data/items.js
 
 export const quranData = [
   { id: 'alfatihah', title: 'Surah Al-Fatihah', pages: 7, default: false },
