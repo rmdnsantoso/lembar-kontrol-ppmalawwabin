@@ -21,9 +21,8 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
   const pageWidth = 210;
   const contentWidth = pageWidth - (marginX * 2);
 
-  // --- SETTINGAN (NAIK DIKIT BIAR AMAN) ---
-  const footerY = 294;        // Posisi Footer (Naik 2mm dari sebelumnya)
-  const absoluteLimitY = 291; // Batas Konten (Naik dikit biar gak nabrak footer)
+  const footerY = 294;        
+  const absoluteLimitY = 291; 
 
   const boxSize = 6.5; 
   const gap = 1;       
