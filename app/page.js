@@ -147,7 +147,7 @@ export default function Home() {
               const isSelected = selectedItems.find(i => i.id === item.id);
               return (
                 <div key={item.id} onClick={() => toggleItem(item)} className={`cursor-pointer p-3 rounded-lg border flex items-center justify-between transition-all select-none ${isSelected ? 'border-emerald-500 bg-emerald-50 text-emerald-900 shadow-sm' : 'border-slate-200 hover:border-emerald-300 hover:bg-slate-50'}`}>
-                  <div><div className="font-bold text-sm">{item.title}</div><div className="text-xs text-slate-400 mt-1">{item.pages} {templateType === 'quran' ? 'Ayat' : 'Hal'}</div></div>
+                  <div><div className="font-bold text-sm">{item.title}</div><div className="text-xs text-slate-400 mt-1">{item.pages} {templateType === 'quran' ? 'Ayat' : 'Hal'}{item.startPage && item.endPage ? ` (${item.startPage} - ${item.endPage})` : ''}</div></div>
                   {isSelected && <CheckCircle size={18} className="text-emerald-600" />}
                 </div>
               );

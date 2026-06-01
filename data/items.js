@@ -144,4 +144,11 @@ export const hadistData = [
   { id: 'jihad', title: 'K. Jihad', pages: 63, default: false },
   { id: 'haji', title: 'K. Haji', pages: 111, default: false },
   { id: 'manasikhaji', title: 'K. Manasik Haji', pages: 113, default: false },
+  { id: 'nikah', title: 'K. Nikah', pages: 101, default: false },
+  { id: 'tholaq', title: 'K. Tholaq', pages: 97, default: false },
+  { id: 'thoharoh', title: 'K. Thoharoh', pages: 149, default: false },
+  { id: 'zakat', title: 'K. Zakat', pages: 80, default: false },
+  { id: 'khutbah1', title: 'K. Khutbah 1', startPage: 1, endPage: 117, pages: 117, default: false },
+  { id: 'khutbah2', title: 'K. Khutbah 2', startPage: 119, endPage: 231, pages: 113, default: false },
+  { id: 'khutbah3', title: 'K. Khutbah 3', startPage: 233, endPage: 334, pages: 102, default: false },
 ];

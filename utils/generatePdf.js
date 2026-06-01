@@ -84,9 +84,13 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
 
   selectedItems.forEach((item) => {
     
+    const startPage = item.startPage || 1;
+    const endPage = item.endPage || item.pages;
+    const totalItemPages = endPage - startPage + 1;
+
     // --- 1. HITUNG KEBUTUHAN TINGGI SURAT ---
     const boxesPerRow = Math.floor(contentWidth / (boxSize + gap));
-    const totalRows = Math.ceil(item.pages / boxesPerRow);
+    const totalRows = Math.ceil(totalItemPages / boxesPerRow);
     
     const hHeader = 8;
     const hGap = 8; 
@@ -117,7 +121,7 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
     doc.setFont('helvetica', 'bold');
     doc.text(item.title, marginX + 3, currentY + 5.5);
     doc.setFontSize(8);
-    doc.text(`Target: ${item.pages} ${satuan}`, pageWidth - marginX - 3, currentY + 5.5, { align: 'right' });
+    doc.text(`Target: ${totalItemPages} ${satuan}`, pageWidth - marginX - 3, currentY + 5.5, { align: 'right' });
 
     currentY += 8.5; 
 
@@ -129,7 +133,9 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
     doc.setDrawColor(150, 150, 150); 
     doc.setLineWidth(0.1);
 
-    for (let i = 1; i <= item.pages; i++) {
+    let iterationCount = 0;
+
+    for (let i = startPage; i <= endPage; i++) {
       if (xPos === marginX) {
           if (currentY + boxSize > absoluteLimitY) {
               doc.addPage(); 
@@ -144,14 +150,15 @@ export const generatePdf = (namaSantri, kost, selectedItems, templateType) => {
       doc.text(String(i), xText, currentY + 4.5);
 
       xPos += (boxSize + gap);
+      iterationCount++;
 
-      if (i % boxesPerRow === 0) {
+      if (iterationCount % boxesPerRow === 0) {
         xPos = marginX;
         currentY += (boxSize + gap);
       }
     }
 
-    if (item.pages % boxesPerRow !== 0) {
+    if (iterationCount % boxesPerRow !== 0) {
         currentY += (boxSize + gap);
     }
     
