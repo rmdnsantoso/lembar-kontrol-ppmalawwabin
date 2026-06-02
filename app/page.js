@@ -177,7 +177,7 @@ export default function Home() {
       {/* Footer */}
       <div className="mt-auto pt-10 pb-6 text-center">
         <p className="text-xs text-slate-400 font-medium tracking-wide uppercase">
-            &copy; 2025 WooZiiMoe &bull; PPM Al-Awwabin
+            &copy; 2025 <a href="https://portofolio-romadhon.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-500 transition-colors">WooZiiMoe</a> &bull; PPM Al-Awwabin
         </p>
       </div>
     </div>
